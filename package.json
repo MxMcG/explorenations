@@ -35,7 +35,8 @@
     "source-map-support": "^0.4.15",
     "sqlite3": "^3.1.8",
     "universal-router": "^3.2.0",
-    "whatwg-fetch": "^2.0.3"
+    "whatwg-fetch": "^2.0.3",
+    "wpapi": "^1.1.2"
   },
   "devDependencies": {
     "assets-webpack-plugin": "^3.5.1",
@@ -144,13 +145,7 @@
       "/build/server.js"
     ]
   },
-  "lint-staged": {
-    "*.{js,jsx}": ["eslint --fix", "git add"],
-    "*.{json,graphql}": ["prettier --write", "git add"],
-    "*.{css,less,scss,sss}": ["stylelint --fix", "git add"]
-  },
-  "scripts": {
-    "precommit": "lint-staged",
+  "scripts": {    
     "lint-js": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" .",
     "lint-css": "stylelint \"src/**/*.{css,less,scss,sss}\"",
     "lint": "yarn run lint-js && yarn run lint-css",

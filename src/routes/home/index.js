@@ -11,20 +11,60 @@ import React from 'react';
 import Home from './Home';
 import Layout from '../../components/Layout';
 
-async function action({ fetch }) {
-  const resp = await fetch('/graphql', {
-    body: JSON.stringify({
-      query: '{news{title,link,content}}',
-    }),
+const WPAPI = require('wpapi');
+
+const wp = new WPAPI({ endpoint: 'http://nationsfoundation.org/wp-json' });
+
+const fetchTagBySearch = new Promise((resolve, reject) => {
+  wp
+    .tags()
+    .param('search', 'germany')
+    .then(tags => {
+      resolve(tags[0].id);
+      // do something with the returned posts
+    })
+    .catch(err => {
+      reject(err);
+      // handle error
+    });
+});
+
+async function getPosts(id) {
+  return new Promise((resolve, reject) => {
+    wp
+      .posts()
+      .param('tags', id)
+      .then(post => {
+        resolve(post);
+      })
+      .catch(err => {
+        reject(err);
+        // handle error
+      });
   });
-  const { data } = await resp.json();
-  if (!data || !data.news) throw new Error('Failed to load the news feed.');
+}
+
+// call our promise
+async function allPosts() {
+  try {
+    const id = await fetchTagBySearch;
+    const posts = await getPosts(id);
+    return posts;
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+// const { data } = await resp.json();
+// if (!data || !data.news) throw new Error('Failed to load the news feed.');
+async function action() {
+  const data = await allPosts();
+  console.log('BIG DATA', data);
   return {
     chunks: ['home'],
     title: 'React Starter Kit',
     component: (
       <Layout>
-        <Home news={data.news} />
+        <Home data={data} />
       </Layout>
     ),
   };

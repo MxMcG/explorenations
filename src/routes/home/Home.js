@@ -14,35 +14,31 @@ import s from './Home.css';
 
 class Home extends React.Component {
   static propTypes = {
-    news: PropTypes.arrayOf(
-      PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        link: PropTypes.string.isRequired,
-        content: PropTypes.string,
-      }),
-    ).isRequired,
+    data: PropTypes.object,
   };
+
+  componentDidMount() {
+    console.log('PROPS', this.props);
+    const uluru = { lat: -25.363, lng: 131.044 };
+    if (window.google) {
+      const map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 4,
+        center: uluru,
+      });
+      // const marker = new google.maps.Marker({
+      //   position: uluru,
+      //   map: map
+      // });
+    }
+  }
 
   render() {
     return (
       <div className={s.root}>
         <div className={s.container}>
-          <h1>React.js News</h1>
-          {this.props.news.map(item =>
-            <article key={item.link} className={s.newsItem}>
-              <h1 className={s.newsTitle}>
-                <a href={item.link}>
-                  {item.title}
-                </a>
-              </h1>
-              <div
-                className={s.newsDesc}
-                // eslint-disable-next-line react/no-danger
-                dangerouslySetInnerHTML={{ __html: item.content }}
-              />
-            </article>,
-          )}
+          <div id="map" className={s.map} />
         </div>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9XyyFEV2xYcPGtr6x3j97HX4-Mnq_Lto" />
       </div>
     );
   }
