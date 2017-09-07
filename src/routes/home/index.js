@@ -11,14 +11,18 @@ import React from 'react';
 import Home from './Home';
 import Layout from '../../components/Layout';
 
+import { Dropdown } from 'semantic-ui-react'
+import { countryOptions } from './tags'
+import 'semantic-ui-css/semantic.min.css';
+
 const WPAPI = require('wpapi');
 
-const wp = new WPAPI({ endpoint: 'http://nationsfoundation.org/wp-json' });
+const wp = new WPAPI({ endpoint: 'https://www.nationsfoundation.org/wp-json' });
 
 const fetchTagBySearch = new Promise((resolve, reject) => {
   wp
     .tags()
-    .param('search', 'germany')
+    .param('search', 'Germany')
     .then(tags => {
       resolve(tags[0].id);
       // do something with the returned posts
@@ -49,6 +53,7 @@ async function allPosts() {
   try {
     const id = await fetchTagBySearch;
     const posts = await getPosts(id);
+    console.log('ID', id)
     return posts;
   } catch (error) {
     console.log(error.message);
@@ -65,6 +70,7 @@ async function action() {
     component: (
       <Layout>
         <Home data={data} />
+        <Dropdown placeholder='Select Country' fluid search selection options={countryOptions} />
       </Layout>
     ),
   };
