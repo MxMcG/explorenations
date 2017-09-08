@@ -10,13 +10,7 @@
 import React from 'react';
 import Home from './Home';
 import Layout from '../../components/Layout';
-
-import { Dropdown } from 'semantic-ui-react'
-import { countryOptions } from './tags'
-import 'semantic-ui-css/semantic.min.css';
-
 const WPAPI = require('wpapi');
-
 const wp = new WPAPI({ endpoint: 'https://www.nationsfoundation.org/wp-json' });
 
 const fetchTagBySearch = new Promise((resolve, reject) => {
@@ -53,7 +47,6 @@ async function allPosts() {
   try {
     const id = await fetchTagBySearch;
     const posts = await getPosts(id);
-    console.log('ID', id)
     return posts;
   } catch (error) {
     console.log(error.message);
@@ -63,7 +56,6 @@ async function allPosts() {
 // if (!data || !data.news) throw new Error('Failed to load the news feed.');
 async function action() {
   const data = await allPosts();
-  console.log('BIG DATA', data);
   return {
     chunks: ['home'],
     title: 'React Starter Kit',

@@ -240,6 +240,6 @@ export const countryOptions = [
   { key: 'ye', value: 'ye', flag: 'ye', text: 'Yemen' },
   { key: 'zm', value: 'zm', flag: 'zm', text: 'Zambia' },
   { key: 'zw', value: 'zw', flag: 'zw', text: 'Zimbabwe' },
-]
+];
 
 export default countryOptions;

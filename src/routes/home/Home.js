@@ -14,24 +14,35 @@ import _ from 'lodash';
 import { Dropdown } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css';
 import s from './Home.css';
-import { countryOptions } from './tags'
+import { countryOptions } from './countries'
 
 class Home extends React.Component {
   static propTypes = {
     data: PropTypes.object,
   };
 
+  constructor(props) {
+    super(props);
+    this.selectLocation = this.selectLocation.bind(this);
+    this.state = {
+      activeCountry: 'Germany',
+      map: {},
+      geocoder: {},
+    };
+  }
+
   componentDidMount() {
-    let location;
     if (window.google) {
       const geocoder = new google.maps.Geocoder();
-      const map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 4,
-        center: location,
-      });
-      geocoder.geocode({ 'address': 'germany'}, (results, status) => {
+      const randomCountry = countryOptions[Math.floor(Math.random() * countryOptions.length)].text;
+      let map;
+      geocoder.geocode({ 'address': randomCountry }, (results, status) => {
         if (status == 'OK') {
-          map.setCenter(results[0].geometry.location);
+          map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 4,
+            center: results[0].geometry.location,
+          });
+          this.setState({ map });
         } else {
           console.log('Geocode was not successful for the following reason: ' + status);
         }
@@ -39,10 +50,22 @@ class Home extends React.Component {
     }
   }
 
-  selectLocation (e, { value }) {
-    console.log('PROPSS', this.props.data);
-    const option = _.find(this.props.data, { value });
-    console.log('OPTION', option)
+  updateLocation(location) {
+    const geocoder = new google.maps.Geocoder();
+    geocoder.geocode({ 'address': location }, (results, status) => {
+      if (status === 'OK') {
+        this.state.map.setCenter(results[0].geometry.location);
+      } else {
+        console.log('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+  }
+
+  selectLocation(e, { value }) {
+    const selectedValue = _.find(countryOptions, { value });
+    const activeCountry = selectedValue.text;
+    this.setState({ activeCountry });
+    this.updateLocation(activeCountry);
   }
 
   render() {
