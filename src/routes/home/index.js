@@ -70,7 +70,6 @@ async function action() {
     component: (
       <Layout>
         <Home data={data} />
-        <Dropdown placeholder='Select Country' fluid search selection options={countryOptions} />
       </Layout>
     ),
   };

@@ -62,6 +62,7 @@ class Html extends React.Component {
         </head>
         <body>
           <div id="app" dangerouslySetInnerHTML={{ __html: children }} />
+
           <script
             dangerouslySetInnerHTML={{ __html: `window.App=${serialize(app)}` }}
           />
@@ -81,6 +82,7 @@ class Html extends React.Component {
               async
               defer
             />}
+          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9XyyFEV2xYcPGtr6x3j97HX4-Mnq_Lto" />
         </body>
       </html>
     );

@@ -10,7 +10,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import _ from 'lodash';
+import { Dropdown } from 'semantic-ui-react'
+import 'semantic-ui-css/semantic.min.css';
 import s from './Home.css';
+import { countryOptions } from './tags'
 
 class Home extends React.Component {
   static propTypes = {
@@ -18,27 +22,36 @@ class Home extends React.Component {
   };
 
   componentDidMount() {
-    console.log('PROPS', this.props);
-    const uluru = { lat: -25.363, lng: 131.044 };
+    let location;
     if (window.google) {
+      const geocoder = new google.maps.Geocoder();
       const map = new google.maps.Map(document.getElementById('map'), {
         zoom: 4,
-        center: uluru,
+        center: location,
       });
-      // const marker = new google.maps.Marker({
-      //   position: uluru,
-      //   map: map
-      // });
+      geocoder.geocode({ 'address': 'germany'}, (results, status) => {
+        if (status == 'OK') {
+          map.setCenter(results[0].geometry.location);
+        } else {
+          console.log('Geocode was not successful for the following reason: ' + status);
+        }
+      });
     }
+  }
+
+  selectLocation (e, { value }) {
+    console.log('PROPSS', this.props.data);
+    const option = _.find(this.props.data, { value });
+    console.log('OPTION', option)
   }
 
   render() {
     return (
       <div className={s.root}>
         <div className={s.container}>
+          <Dropdown placeholder='Select Country' fluid search selection options={countryOptions} onChange={this.selectLocation}/>
           <div id="map" className={s.map} />
         </div>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9XyyFEV2xYcPGtr6x3j97HX4-Mnq_Lto" />
       </div>
     );
   }
