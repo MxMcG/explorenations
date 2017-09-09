@@ -19,6 +19,15 @@
   width: 100%;
 }
 
+.image {
+  height: 300px;
+  width: 300px;
+}
+
+.link {
+  display: block;
+}
+
 .container {
   margin: 0 auto;
   padding: 0 0 40px;

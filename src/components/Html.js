@@ -59,6 +59,7 @@ class Html extends React.Component {
               dangerouslySetInnerHTML={{ __html: style.cssText }}
             />,
           )}
+          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9XyyFEV2xYcPGtr6x3j97HX4-Mnq_Lto" />
         </head>
         <body>
           <div id="app" dangerouslySetInnerHTML={{ __html: children }} />
@@ -82,7 +83,6 @@ class Html extends React.Component {
               async
               defer
             />}
-          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9XyyFEV2xYcPGtr6x3j97HX4-Mnq_Lto" />
         </body>
       </html>
     );
