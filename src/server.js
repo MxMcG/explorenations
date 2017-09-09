@@ -135,7 +135,6 @@ app.get('*', async (req, res, next) => {
       path: req.path,
       query: req.query,
     });
-    console.log('ROUTE', route);
 
     if (route.redirect) {
       res.redirect(route.status || 302, route.redirect);

@@ -20,8 +20,7 @@ const wp = new WPAPI({ endpoint: 'https://www.nationsfoundation.org/wp-json' });
 
 class Home extends React.Component {
   static propTypes = {
-    getCountryData: PropTypes.function,
-    initialCountry: PropTypes.string,
+
   };
 
   constructor(props) {
@@ -33,15 +32,16 @@ class Home extends React.Component {
       activeCountry: null,
       map: {},
       geocoder: {},
-      countryData: {},
+      countryData: null,
     };
   }
 
   componentDidMount() {
     if (window.google) {
       const geocoder = new google.maps.Geocoder();
+      const initialCountry = countryOptions[Math.floor(Math.random() * countryOptions.length)].text
       let map;
-      geocoder.geocode({ 'address': countryOptions[Math.floor(Math.random() * countryOptions.length)].text }, (results, status) => {
+      geocoder.geocode({ 'address': initialCountry }, (results, status) => {
         if (status == 'OK') {
           map = new google.maps.Map(document.getElementById('map'), {
             zoom: 4,
@@ -50,6 +50,7 @@ class Home extends React.Component {
           this.setState({
             map,
             geocoder,
+            activeCountry: initialCountry,
           });
         } else {
           console.log('Geocode was not successful for the following reason: ' + status);
@@ -77,7 +78,7 @@ class Home extends React.Component {
   }
 
   getCountryData(name) {
-    console.log(name)
+    let countryData;
     async function fetchTagBySearch(name) {
       return new Promise((resolve, reject) => {
         wp
@@ -113,26 +114,29 @@ class Home extends React.Component {
       });
     }
 
-    // call our promise
-    async function allPosts(country) {
-      try {
-        const id = await fetchTagBySearch(country);
-        const posts = await getPosts(id);
-        console.log("UPDAED POSTS", posts)
-        this.setState({ countryData: posts });
-      } catch (error) {
-        console.log(error.message);
-      }
-    }
-
-    allPosts(name);
+    fetchTagBySearch(name)
+      .then(id => {
+        getPosts(id).then(posts => {
+          this.setState({ countryData: posts });
+        });
+      }).catch(err => {
+        this.setState({ countryData: null });
+        console.log("Error", err.message);
+      });
   }
 
   render() {
     return (
       <div className={s.root}>
         <div className={s.container}>
-          <Dropdown placeholder='Select Country' fluid search selection options={countryOptions} onChange={this.selectLocation}/>
+          <Dropdown
+            placeholder="Select Country"
+            fluid
+            search
+            selection
+            options={countryOptions}
+            onChange={this.selectLocation}
+            placeholder={`${this.state.activeCountry}`} />
           <div id="map" className={s.map} />
         </div>
       </div>
