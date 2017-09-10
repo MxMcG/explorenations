@@ -193,17 +193,27 @@ class Home extends React.Component {
 
   updatePostLinks(posts) {
     const postLinks = [];
-    posts.forEach((post, index) => {
-      postLinks.push(
-        <div key={index}>
-          <img src={post.mediaSrc} alt="Nations Foundation Image" className={s.image}></img>
-          <a href={post.link} target="_blank" className={s.link} key={index}>
-            {post.title.rendered}
-          </a>
-        </div>
-      );
-    });
-    this.setState({ postLinks });
+      const links = posts.map((post, index) => {
+        // Take each post, make call for media image
+        // Obtain media url for each post
+        wp.media().id(post.featured_media).then(media => {
+          // Add media source to post object
+          // posts[i]["mediaSrc"] = media.source_url;
+          console.log("MEDIA", media)
+          return (
+            <div key={index}>
+              <img
+                src={media.source_url}
+                alt="Nations Foundation"
+                className={s.image} />
+              <a href={post.link} target="_blank" className={s.link} key={index}>
+                {post.title.rendered}
+              </a>
+            </div>
+          );
+        });
+      });
+      this.setState({ postLinks: links});
   }
 
   render() {
@@ -219,7 +229,9 @@ class Home extends React.Component {
             onChange={this.selectLocation}
             placeholder={`${this.state.activeCountry}`} />
           <div id="map" className={s.map} />
-          <div>{ this.state.postLinks }</div>
+          <div>
+            { this.state.postLinks }
+          </div>
         </div>
       </div>
     );
