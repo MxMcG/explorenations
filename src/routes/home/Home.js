@@ -193,27 +193,28 @@ class Home extends React.Component {
 
   updatePostLinks(posts) {
     const postLinks = [];
-      const links = posts.map((post, index) => {
-        // Take each post, make call for media image
-        // Obtain media url for each post
-        wp.media().id(post.featured_media).then(media => {
-          // Add media source to post object
-          // posts[i]["mediaSrc"] = media.source_url;
-          console.log("MEDIA", media)
+    for (let i = 0; i < posts.length; ++i) {
+      postLinks.push(
+        wp.media().id(posts[i].featured_media).then(media => {
           return (
-            <div key={index}>
+            <div key={i}>
               <img
                 src={media.source_url}
                 alt="Nations Foundation"
                 className={s.image} />
-              <a href={post.link} target="_blank" className={s.link} key={index}>
-                {post.title.rendered}
+              <a href={posts[i].link} target="_blank" className={s.link} key={i}>
+                {posts[i].title.rendered}
               </a>
             </div>
           );
-        });
-      });
-      this.setState({ postLinks: links});
+        })
+      )
+    }
+    Promise.all(postLinks).then(array => {
+      this.setState({ postLinks: array });
+    }).catch(err => {
+      console.log(err)
+    })
   }
 
   render() {
