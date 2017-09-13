@@ -60,6 +60,12 @@ class Home extends React.Component {
           map = new google.maps.Map(document.getElementById('map'), {
             zoom: 4,
             center: results[0].geometry.location,
+            zoomControl: false,
+            mapTypeControl: true,
+            scaleControl: false,
+            streetViewControl: false,
+            rotateControl: false,
+            fullscreenControl: false,
           });
           const fusionTable = new google.maps.FusionTablesLayer({
             query: {
@@ -131,7 +137,21 @@ class Home extends React.Component {
           .posts()
           .param('tags', id)
           .then(posts => {
-            resolve(posts);
+            const linksWithMedia = [];
+            for (let i = 0; i < posts.length; i += 1) {
+              linksWithMedia.push(
+                wp.media().id(posts[i].featured_media).then(media => {
+                  posts[i]['mediaUrl'] = media.source_url;
+                  return posts[i];
+                })
+              )
+            }
+            Promise.all(linksWithMedia).then(array => {
+              resolve(array);
+            }).catch(err => {
+              console.log(err)
+            })
+            // resolve(posts);
           })
           .catch(err => {
             reject(err);
@@ -193,22 +213,38 @@ class Home extends React.Component {
 
   updatePostLinks(posts) {
     const postLinks = [];
-    for (let i = 0; i < posts.length; ++i) {
+    for (let i = 0; i < posts.length; i += 2) {
       postLinks.push(
-        wp.media().id(posts[i].featured_media).then(media => {
-          return (
-            <div key={i}>
+        <div className={s.linkElement} key={i}>
+          <img
+            src={posts[i].mediaUrl}
+            alt="Nations Foundation"
+            className={s.image} />
+          <a
+            href={posts[i].link}
+            target="_blank"
+            className={`${s.link} ${s.hide}`}
+            key={i}
+          >
+            {posts[i].title.rendered}
+          </a>
+          {posts[i + 1] &&
+            <div>
               <img
-                src={media.source_url}
+                src={posts[i + 1].mediaUrl}
                 alt="Nations Foundation"
                 className={s.image} />
-              <a href={posts[i].link} target="_blank" className={s.link} key={i}>
-                {posts[i].title.rendered}
+              <a
+                href={posts[i + 1].link}
+                target="_blank"
+                className={`${s.link} ${s.hide}`}
+                key={i + 1}
+              >
+                {posts[i + 1].title.rendered}
               </a>
-            </div>
-          );
-        })
-      )
+            </div>}
+        </div>
+      );
     }
     Promise.all(postLinks).then(array => {
       this.setState({ postLinks: array });
@@ -231,7 +267,7 @@ class Home extends React.Component {
             placeholder={`${this.state.activeCountry}`}
             className={s.dropdownOveride} />
           <div id="map" className={s.map} />
-          <div>
+          <div className={s.linkContainer}>
             { this.state.postLinks }
           </div>
         </div>
