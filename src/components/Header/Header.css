@@ -16,16 +16,25 @@
 .root {
   background: #121516;
   color: #fff;
+  display: block;
 }
 
 .container {
   margin: 0 auto;
   padding: 18px 0;
   text-align: center;
+  display: block;
   max-width: var(--max-content-width);
 }
 
 .logo {
   height: 100%;
-  width: 50%;
+  width: 150px;
+}
+
+@media only screen and (min-width: 640px) {
+  .logo {
+    height: 100%;
+    width: 200px;
+  }
 }
