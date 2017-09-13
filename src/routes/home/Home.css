@@ -10,13 +10,17 @@
 @import '../../components/variables.css';
 
 .root {
-  padding-left: 20px;
-  padding-right: 20px;
+
 }
 
 .map {
-  height: 400px;
   width: 100%;
+  height: 78%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 22%;
+  bottom: 0;
 }
 
 .image {
@@ -36,31 +40,9 @@
   max-width: 1200px;
 }
 
+.dropdownOveride {
 
-.newsItem {
-  margin: 0 0 2rem;
-}
-
-.newsTitle {
-  font-size: 1.5rem;
-}
-
-.newsDesc {
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-size: 1.125rem;
-  }
-
-  pre {
-    white-space: pre-wrap;
-    font-size: 0.875rem;
-  }
-
-  img {
-    max-width: 100%;
-  }
+  border: none !important;
+  border-bottom: 1px solid #ddd !important;
+  border-radius: 0 !important;
 }

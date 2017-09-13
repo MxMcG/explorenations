@@ -228,7 +228,8 @@ class Home extends React.Component {
             selection
             options={countryOptions}
             onChange={this.selectLocation}
-            placeholder={`${this.state.activeCountry}`} />
+            placeholder={`${this.state.activeCountry}`}
+            className={s.dropdownOveride} />
           <div id="map" className={s.map} />
           <div>
             { this.state.postLinks }
