@@ -15,11 +15,11 @@ import WPAPI from 'wpapi';
 import { Dropdown } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css';
 import s from './Home.css';
+import Post from '../../components/Post';
 import { countryOptions } from './countries'
 const wp = new WPAPI({ endpoint: 'https://www.nationsfoundation.org/wp-json' });
 
 class Home extends React.Component {
-
   constructor(props) {
     super(props);
     this.setInitialLocation = this.setInitialLocation.bind(this);
@@ -27,6 +27,7 @@ class Home extends React.Component {
     this.selectLocation = this.selectLocation.bind(this);
     this.getCountryData = this.getCountryData.bind(this);
     this.updatePostLinks = this.updatePostLinks.bind(this);
+    this.togglePostView = this.togglePostView.bind(this);
     this.state = {
       activeCountry: null,
       map: {},
@@ -162,8 +163,8 @@ class Home extends React.Component {
     fetchTagBySearch(name)
       .then(id => {
         getPosts(id).then(posts => {
-          this.setState({ countryData: posts });
           this.updatePostLinks(posts);
+          this.setState({ countryData: posts });
         });
       }).catch(err => {
         this.setState({
@@ -172,6 +173,21 @@ class Home extends React.Component {
         });
         console.log("Error", err.message);
       });
+  }
+
+  togglePostView(index) {
+    console.log("I", index)
+    // hide all other posts
+    // show image, fully formatted div along bottom screen
+    if (this.state.showPost === true) {
+      this.setState({
+        showPost: false
+      })
+    } else {
+      this.setState({
+        showPost: true
+      })
+    }
   }
 
   updateLocation(location) {
@@ -212,45 +228,82 @@ class Home extends React.Component {
   }
 
   updatePostLinks(posts) {
-    const postLinks = [];
-    for (let i = 0; i < posts.length; i += 2) {
-      postLinks.push(
-        <div className={s.linkElement} key={i}>
-          <img
-            src={posts[i].mediaUrl}
-            alt="Nations Foundation"
-            className={s.image} />
-          <a
-            href={posts[i].link}
-            target="_blank"
-            className={`${s.link} ${s.hide}`}
-            key={i}
-          >
-            {posts[i].title.rendered}
-          </a>
-          {posts[i + 1] &&
-            <div>
-              <img
-                src={posts[i + 1].mediaUrl}
-                alt="Nations Foundation"
-                className={s.image} />
-              <a
-                href={posts[i + 1].link}
-                target="_blank"
-                className={`${s.link} ${s.hide}`}
-                key={i + 1}
-              >
-                {posts[i + 1].title.rendered}
-              </a>
-            </div>}
-        </div>
-      );
-    }
-    Promise.all(postLinks).then(array => {
-      this.setState({ postLinks: array });
-    }).catch(err => {
-      console.log(err)
-    })
+    // const postLinks = [];
+    // for (let i = 0; i < posts.length; i += 2) {
+    //   if (posts[i + 1]) {
+    //     postLinks.push(
+    //       <div className={s.linkWrap} key={i}>
+    //         <div
+    //           className={s.linkElement}
+    //           onClick={() => {
+    //             this.togglePostView(i);
+    //           }}
+    //           >
+    //           <img
+    //             src={posts[i].mediaUrl}
+    //             alt="Nations Foundation"
+    //             className={s.image} />
+    //           <a
+    //             href={posts[i].link}
+    //             target="_blank"
+    //             className={`${s.link} ${this.state.showPost === i ? s.showPost : s.hidePost}`}
+    //             key={i}
+    //             >
+    //             {posts[i].title.rendered}
+    //           </a>
+    //         </div>
+    //         <div
+    //           className={s.linkElement}
+    //           onClick={() => {
+    //             this.togglePostView(i + 1);
+    //           }}
+    //           >
+    //           <img
+    //             src={posts[i + 1].mediaUrl}
+    //             alt="Nations Foundation"
+    //             className={s.image} />
+    //           <a
+    //             href={posts[i + 1].link}
+    //             target="_blank"
+    //             className={`${s.link} ${this.state.showPost === i ? s.showPost : s.hidePost}`}
+    //             key={i + 1}
+    //           >
+    //           {posts[i + 1].title.rendered}
+    //           </a>
+    //         </div>
+    //       </div>
+    //     );
+    //   } else {
+    //     postLinks.push(
+    //       <div className={s.linkWrap} key={i}>
+    //         <div
+    //           className={s.linkElement}
+    //           onClick={() => {
+    //             this.togglePostView(i);
+    //           }}
+    //           >
+    //           <img
+    //             src={posts[i].mediaUrl}
+    //             alt="Nations Foundation"
+    //             className={s.image} />
+    //           <a
+    //             href={posts[i].link}
+    //             target="_blank"
+    //             className={`${s.link} ${this.state.showPost === i ? s.showPost : s.hidePost}`}
+    //             key={i}
+    //             >
+    //             {posts[i].title.rendered}
+    //           </a>
+    //         </div>
+    //       </div>
+    //     );
+    //   }
+    // }
+    // Promise.all(postLinks).then(array => {
+    //   this.setState({ postLinks: array.reverse() });
+    // }).catch(err => {
+    //   console.log(err)
+    // })
   }
 
   render() {
@@ -268,7 +321,12 @@ class Home extends React.Component {
             className={s.dropdownOveride} />
           <div id="map" className={s.map} />
           <div className={s.linkContainer}>
-            { this.state.postLinks }
+
+            { this.state.countryData !== null && this.state.countryData.map((data, index) => (
+                <Post key={index} data={data} />
+              ))
+            }
+
           </div>
         </div>
       </div>
