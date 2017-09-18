@@ -22,14 +22,15 @@ const wp = new WPAPI({ endpoint: 'https://www.nationsfoundation.org/wp-json' });
 class Home extends React.Component {
   constructor(props) {
     super(props);
+    this.activatePost = this.activatePost.bind(this);
     this.setInitialLocation = this.setInitialLocation.bind(this);
     this.updateLocation = this.updateLocation.bind(this);
     this.selectLocation = this.selectLocation.bind(this);
     this.getCountryData = this.getCountryData.bind(this);
-    this.updatePostLinks = this.updatePostLinks.bind(this);
     this.togglePostView = this.togglePostView.bind(this);
     this.state = {
       activeCountry: null,
+      activePost: null,
       map: {},
       geocoder: {},
       countryData: null,
@@ -163,7 +164,6 @@ class Home extends React.Component {
     fetchTagBySearch(name)
       .then(id => {
         getPosts(id).then(posts => {
-          this.updatePostLinks(posts);
           this.setState({ countryData: posts });
         });
       }).catch(err => {
@@ -227,83 +227,9 @@ class Home extends React.Component {
     });
   }
 
-  updatePostLinks(posts) {
-    // const postLinks = [];
-    // for (let i = 0; i < posts.length; i += 2) {
-    //   if (posts[i + 1]) {
-    //     postLinks.push(
-    //       <div className={s.linkWrap} key={i}>
-    //         <div
-    //           className={s.linkElement}
-    //           onClick={() => {
-    //             this.togglePostView(i);
-    //           }}
-    //           >
-    //           <img
-    //             src={posts[i].mediaUrl}
-    //             alt="Nations Foundation"
-    //             className={s.image} />
-    //           <a
-    //             href={posts[i].link}
-    //             target="_blank"
-    //             className={`${s.link} ${this.state.showPost === i ? s.showPost : s.hidePost}`}
-    //             key={i}
-    //             >
-    //             {posts[i].title.rendered}
-    //           </a>
-    //         </div>
-    //         <div
-    //           className={s.linkElement}
-    //           onClick={() => {
-    //             this.togglePostView(i + 1);
-    //           }}
-    //           >
-    //           <img
-    //             src={posts[i + 1].mediaUrl}
-    //             alt="Nations Foundation"
-    //             className={s.image} />
-    //           <a
-    //             href={posts[i + 1].link}
-    //             target="_blank"
-    //             className={`${s.link} ${this.state.showPost === i ? s.showPost : s.hidePost}`}
-    //             key={i + 1}
-    //           >
-    //           {posts[i + 1].title.rendered}
-    //           </a>
-    //         </div>
-    //       </div>
-    //     );
-    //   } else {
-    //     postLinks.push(
-    //       <div className={s.linkWrap} key={i}>
-    //         <div
-    //           className={s.linkElement}
-    //           onClick={() => {
-    //             this.togglePostView(i);
-    //           }}
-    //           >
-    //           <img
-    //             src={posts[i].mediaUrl}
-    //             alt="Nations Foundation"
-    //             className={s.image} />
-    //           <a
-    //             href={posts[i].link}
-    //             target="_blank"
-    //             className={`${s.link} ${this.state.showPost === i ? s.showPost : s.hidePost}`}
-    //             key={i}
-    //             >
-    //             {posts[i].title.rendered}
-    //           </a>
-    //         </div>
-    //       </div>
-    //     );
-    //   }
-    // }
-    // Promise.all(postLinks).then(array => {
-    //   this.setState({ postLinks: array.reverse() });
-    // }).catch(err => {
-    //   console.log(err)
-    // })
+  activatePost(index) {
+    console.log("INDEX", index)
+    this.setState({ activePost: index });
   }
 
   render() {
@@ -323,7 +249,12 @@ class Home extends React.Component {
           <div className={s.linkContainer}>
 
             { this.state.countryData !== null && this.state.countryData.map((data, index) => (
-                <Post key={index} data={data} />
+                <Post
+                  index={index}
+                  data={data}
+                  activatePost={this.activatePost}
+                  activePost={this.state.activePost}
+                />
               ))
             }
 
@@ -335,15 +266,3 @@ class Home extends React.Component {
 }
 
 export default withStyles(s)(Home);
-
-// for (let i = 0; i < posts.length; i++) {
-//   // Obtain media url for each post
-//   wp.media().id(posts[i].featured_media).then(media => {
-//     // Add media source to post object
-//     posts[i]["mediaSrc"] = media.source_url;
-//   });
-//   if (typeof posts[i+1] === 'undefined') {
-//     console.log("DDDD")
-//     resolve(posts);
-//   }
-// }

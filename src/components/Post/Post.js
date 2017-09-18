@@ -13,35 +13,114 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Post.css';
 
 class Post extends React.Component {
+  static deafultProps = {
+    data: PropTypes.object,
+  }
+
   static propTypes = {
-    data: PropTypes.object.isRequired,
+    index: PropTypes.string.isRequired,
+    activatePost: PropTypes.func.isRequired,
+    activePost: PropTypes.number.isRequired,
   };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      isActive: true
+    };
+  }
+
+  componentWillReceiveProps(nextProps, nextState) {
+    if ((nextProps.activePost === this.props.index) || (this.props.activePost === null)) {
+      this.setState({ isActive: true });
+    }
+  }
 
   render() {
     console.log("POST")
     return (
       <div className={s.linkWrap}>
-        <div
-          className={s.linkElement}
-          onClick={() => {
+        {(this.props.activePost === this.props.index) ? (
 
-          }}
+          <div
+            className={
+              `${s.linkElement}
+               ${s.activePost}`
+            }
           >
-          <img
-            src={this.props.data.mediaUrl}
-            alt="Nations Foundation"
-            className={s.image} />
-          <a
-            href={this.props.data.link}
-            target="_blank"
-            className={`${s.link}`}
+            <div
+              className={`${s.clear} ${this.state.isActive ? s.activeClear : s.inactiveClear}`}
+              onClick={() => {
+                this.props.activatePost(null);
+              }}
+            >X</div>
+            <img
+              src={this.props.data.mediaUrl}
+              alt="Nations Foundation"
+              className={s.image} />
+            <a
+              href={this.props.data.link}
+              target="_blank"
+              className={`${s.link}`}
+              >
+              {this.props.data.title.rendered}
+            </a>
+            <div className={s.sideCarrot}>></div>
+          </div>
+
+        ) : (this.props.activePost === null) ? (
+
+          <div
+            className={
+              `${s.linkElement}
+               ${s.inactivePost}`
+            }
+            onClick={() => {
+              this.props.activatePost(this.props.index);
+            }}
             >
-            {this.props.data.title.rendered}
-          </a>
-        </div>
+            <img
+              src={this.props.data.mediaUrl}
+              alt="Nations Foundation"
+              className={s.image} />
+          </div>
+
+        ) : false}
       </div>
     );
   }
 }
 
 export default withStyles(s)(Post);
+
+// : (
+//   <div
+//     className={
+//       `${s.linkElement}
+//        ${this.state.isActive || this.props.activePost === null ? s.activePost : s.inactivePost}`
+//     }
+//     onClick={() => {
+//       this.props.activatePost(this.props.index);
+//     }}
+//     >
+//
+//     <div
+//       className={`${s.clear} ${this.state.isActive ? s.activeClear : s.inactiveClear}`}
+//       onClick={() => {
+//         this.props.activatePost(null);
+//       }}
+//     >X</div>
+//     <img
+//       src={this.props.data.mediaUrl}
+//       alt="Nations Foundation"
+//       className={s.image} />
+//     <a
+//       href={this.props.data.link}
+//       target="_blank"
+//       className={`${s.link}`}
+//       >
+//       {this.props.data.title.rendered}
+//     </a>
+//     <div className={s.sideCarrot}>></div>
+//   </div>
+// )

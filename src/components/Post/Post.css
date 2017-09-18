@@ -14,31 +14,61 @@
   text-align: center;
   display: inline-block;
   margin-bottom: 6px;
+  width: 100%;
 }
 
 .linkElement {
-  width: 75px;
-  height: 75px;
+  /*width: 75px;
+  height: 75px;*/
   margin: 15px 7px;
   cursor: pointer;
 }
 
 .link {
-  display: block;
+  display: inline;
+  width: 20%;
+}
+
+.clear {
+  color: black;
+  display: inline;
+  width: 20%;
+  padding: 60px;
+}
+
+.activeClear {
+  display: inline;
+  color: black;
+  transition: color 1 ease-in;
+}
+
+.inactiveClear {
+  display: none;
+  color: black;
+}
+
+.sideCarrot {
+  display: inline;
+  width: 20%;
 }
 
 .image {
+  display: inline;
   height: 100%;
   width: 100%;
   border-radius: 50%;
+  width: 20%;
 }
 
-.hidePost {
-  display: none;
+.activePost {
+  display: inline-block;
+  background: white;
+  transition: background 2s ease-in;
 }
 
-.showPost {
-  display: none;
+.inactivePost {
+  background: black;
+  transition: background 2s ease-in;
 }
 
 @media only screen and (min-width: 640px) {
