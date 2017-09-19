@@ -60,6 +60,7 @@ class Html extends React.Component {
             />,
           )}
           <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9XyyFEV2xYcPGtr6x3j97HX4-Mnq_Lto" />
+          <script src="http://hammerjs.github.io/dist/hammer.min.js" />
         </head>
         <body>
           <div id="app" dangerouslySetInnerHTML={{ __html: children }} />

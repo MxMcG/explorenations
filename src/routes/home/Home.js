@@ -15,7 +15,7 @@ import WPAPI from 'wpapi';
 import { Dropdown } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css';
 import s from './Home.css';
-import Post from '../../components/Post';
+import Slider from '../../components/Slider';
 import { countryOptions } from './countries'
 const wp = new WPAPI({ endpoint: 'https://www.nationsfoundation.org/wp-json' });
 
@@ -246,19 +246,9 @@ class Home extends React.Component {
             placeholder={`${this.state.activeCountry}`}
             className={s.dropdownOveride} />
           <div id="map" className={s.map} />
-          <div className={s.linkContainer}>
 
-            { this.state.countryData !== null && this.state.countryData.map((data, index) => (
-                <Post
-                  index={index}
-                  data={data}
-                  activatePost={this.activatePost}
-                  activePost={this.state.activePost}
-                />
-              ))
-            }
+          <Slider />
 
-          </div>
         </div>
       </div>
     );
@@ -266,3 +256,13 @@ class Home extends React.Component {
 }
 
 export default withStyles(s)(Home);
+
+// { this.state.countryData !== null && this.state.countryData.map((data, index) => (
+//     <Post
+//       index={index}
+//       data={data}
+//       activatePost={this.activatePost}
+//       activePost={this.state.activePost}
+//     />
+//   ))
+// }

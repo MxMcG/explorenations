@@ -1,6 +1,6 @@
 {
-  "name": "Post",
+  "name": "Slider",
   "version": "0.0.0",
   "private": true,
-  "main": "./Post.js"
+  "main": "./Slider.js"
 }
