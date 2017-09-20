@@ -23,12 +23,12 @@ const remote = {
 };
 
 // Heroku
-// const remote = {
-//   name: 'heroku',
-//   url: 'https://git.heroku.com/<app>.git',
-//   branch: 'master',
-//   website: 'https://<app>.herokuapp.com',
-// };
+const remote = {
+  name: 'heroku',
+  url: 'https://git.heroku.com/secret-caverns-11525.git',
+  branch: 'master',
+  website: 'http://secret-caverns-11525.herokuapp.com/',
+};
 
 // Azure Web Apps
 // const remote = {
