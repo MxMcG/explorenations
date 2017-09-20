@@ -17,11 +17,12 @@
   background: #121516;
   color: #fff;
   display: block;
+  height: 10%;
 }
 
 .container {
   margin: 0 auto;
-  padding: 18px 0;
+  padding: 10px 0;
   text-align: center;
   display: block;
   max-width: var(--max-content-width);
@@ -29,11 +30,11 @@
 
 .logo {
   height: 100%;
-  width: 150px;
+  width: 25%;
 }
 
 @media only screen and (min-width: 640px) {
-  .logo {    
+  .logo {
     width: 200px;
   }
 }

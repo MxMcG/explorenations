@@ -235,21 +235,18 @@ class Home extends React.Component {
   render() {
     return (
       <div className={s.root}>
-        <div className={s.container}>
-          <Dropdown
-            placeholder="Select Country"
-            fluid
-            search
-            selection
-            options={countryOptions}
-            onChange={this.selectLocation}
-            placeholder={`${this.state.activeCountry}`}
-            className={s.dropdownOveride} />
+        <Dropdown
+          placeholder="Select Country"
+          fluid
+          search
+          selection
+          options={countryOptions}
+          onChange={this.selectLocation}
+          placeholder={`${this.state.activeCountry}`}
+          className={s.dropdownOveride} />
+
           <div id="map" className={s.map} />
-
           <Slider />
-
-        </div>
       </div>
     );
   }
