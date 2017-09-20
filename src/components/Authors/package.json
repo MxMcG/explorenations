@@ -1,0 +1,6 @@
+{
+  "name": "Authors",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./Authors.js"
+}

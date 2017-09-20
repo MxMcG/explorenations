@@ -244,9 +244,13 @@ class Home extends React.Component {
           onChange={this.selectLocation}
           placeholder={`${this.state.activeCountry}`}
           className={s.dropdownOveride} />
-
+        <div className={s.mapWrap}>
           <div id="map" className={s.map} />
-          <Slider />
+          <Slider
+            postData={this.state.countryData}
+            authorData={this.state.countryData}
+          />
+        </div>
       </div>
     );
   }

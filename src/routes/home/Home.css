@@ -22,13 +22,22 @@
   position: absolute;
 }
 
-.map {
-  width: 100%;
+.mapWrap {
   height: 94%;
+  width: 100%;
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
+}
+
+.map {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
 }
 
 @media only screen and (min-width: 640px) {

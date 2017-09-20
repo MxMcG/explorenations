@@ -1,12 +1,13 @@
 .sliderContainer {
   position: relative;
-  top: 60%;
-  height: 40%;
+  top: 80%;
+  height: 20%;
+  overflow: hidden;
   z-index: 3;
   background: lightblue;
   width: 94%;
   border-radius: 4px 4px 0;
-  transition: top .25s ease-in ;
+  transition: top .25s ease-in, height .25s ease-in;
   text-align: center;
   left: 50%;
   -webkit-transform: translateX(-50%);
@@ -22,6 +23,31 @@
 
 .filter {
 
+  height: 30px;
+  width: 200px;
+  margin: 0 auto;
+  border: 1px grey solid;
+}
+
+.activeList {
+  background: transparent;
+}
+
+.inactiveList {
+  background: grey;
+}
+
+.boxLeft {
+  width: 50%;
+  height: 100%;
+  border-right: 1px grey solid;
+  display: inline-block;
+}
+
+.boxRight {
+  width: 50%;
+  height: 100%;
+  display: inline-block;
 }
 
 .listWrap {
