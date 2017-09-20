@@ -1,22 +1,22 @@
 .sliderContainer {
-  position: absolute;
+  position: relative;
+  top: 60%;
+  height: 40%;
   z-index: 3;
   background: lightblue;
-  height: 60%;
   width: 94%;
-  margin: 0 auto;
-  border-radius: 4px 4px 0;
-  bottom: -40%;
-  transition: bottom .25s ease-in;
+  border-radius: 4px 4px 0;  
+  transition: top .25s ease-in ;
   text-align: center;
   left: 50%;
   -webkit-transform: translateX(-50%);
-  transform: translateX(-50%)
+  transform: translateX(-50%);
+  overflow: hidden;
 }
 
 .slideArea {
   background: orange;
-  height: 20%;
+  height: 80%;
   width: 100%;
 }
 

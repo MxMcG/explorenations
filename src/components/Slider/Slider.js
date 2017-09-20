@@ -38,18 +38,23 @@ class Slider extends React.Component {
         ]
       });
       hammertime.on('panup', function(ev) {
-        $('#sliderContainer').css('bottom', '0')
+      	$('#sliderContainer').css('height', '60%')
+        $('#sliderContainer').css('top', '40%')
+        $('#slideArea').css('height', '20%')
+        $('#listWrap').css('overflow', 'scroll')
       });
 
       hammertime.on('pandown', function(ev) {
-        $('#sliderContainer').css('bottom', '-40%')
+      	$('#sliderContainer').css('height', '20%')
+        $('#sliderContainer').css('top', '80%')
+        $('#listWrap').css('overflow', 'hidden')
+        $('#slideArea').css('height', '80%')
       });
     }
   }
 
   render() {
     return (
-      <div>
         <div className={s.sliderContainer} id={'sliderContainer'}>
           <div className={s.slideArea} id={'slideArea'}>
             <div className={s.arrow}>^</div>
@@ -60,7 +65,7 @@ class Slider extends React.Component {
             <div className={s.boxRight}></div>
           </div>
 
-          <div className={s.listWrap}>
+          <div className={s.listWrap} id={'listWrap'}>
             <ul>
               <li>First Post</li>
               <li>Second Post</li>
@@ -71,7 +76,6 @@ class Slider extends React.Component {
             </ul>
           </div>
         </div>
-      </div>
     );
   }
 }
