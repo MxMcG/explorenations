@@ -38,16 +38,17 @@ class Slider extends React.Component {
         ]
       });
       hammertime.on('panup', function(ev) {
-      	$('#sliderContainer').css('height', '78%')
-        $('#slideArea').css('height', '14%')
+      	// $('#sliderContainer').css('height', '78%')
+        $('#listWrap').css('max-height', '350px')
+        $('#slideArea').css('height', '100%')
         $('#sliderContainer').css('overflow-y', 'scroll')
       });
 
       hammertime.on('pandown', function(ev) {
-      	$('#sliderContainer').css('height', '24%')
-        $('#listWrap').css('overflow', 'unset')
+      	// $('#sliderContainer').css('height', '24%')
+      	$('#listWrap').css('max-height', '0px')
         $('#slideArea').css('height', '100%')
-        $('#sliderContainer').css('overflow-y', 'hidden')
+        $('#sliderContainer').css('overflow-y', 'hidden');
       });
     }
   }

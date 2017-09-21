@@ -1,14 +1,13 @@
 .sliderContainer {
   position: absolute;
-  height: 24%;
   width: 94%;
+  /*max-height: 60%;*/
   bottom: 0;
   left: 50%;
   overflow: hidden;
   z-index: 3;
   background: #FFFFFD;
-  border-radius: 10px 10px 0;
-  transition: top .25s ease-in, height .25s ease-in;
+  border-radius: 10px 10px 0 0;
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
   overflow: hidden;
@@ -21,8 +20,25 @@
   text-align: center;
 }
 
-.filter {
+.listWrap {
+  max-height: 0px;
+  width: 100%;
+  -webkit-transition: height .25s ease-in, overflow-y .25s ease-in .25s;
+  transition: max-height .25s ease-in, overflow-y .25s ease-in .25s;
+}
 
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-top: 40px;
+}
+
+/* BELOW STYLES NOT USED. ADD BACK IN IF FILTER BOX ADDED BACK */
+
+.filter {
   height: 30px;
   width: 200px;
   margin: 0 auto;
@@ -48,18 +64,4 @@
   width: 50%;
   height: 100%;
   display: inline-block;
-}
-
-.listWrap {
-  height: 100%;
-  width: 100%;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-li {
-  margin-top: 40px;
 }
