@@ -1,14 +1,14 @@
 .sliderContainer {
-  position: relative;
-  top: 80%;
-  height: 20%;
+  position: absolute;
+  height: 24%;
+  width: 94%;
+  bottom: 0;
+  left: 50%;
   overflow: hidden;
   z-index: 3;
   background: #FFFFFD;
-  width: 94%;
   border-radius: 10px 10px 0;
   transition: top .25s ease-in, height .25s ease-in;
-  left: 50%;
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
   overflow: hidden;
@@ -16,7 +16,7 @@
 
 .slideArea {
   background: orange;
-  height: 80%;
+  height: 100%;
   width: 100%;
   text-align: center;
 }
@@ -53,7 +53,6 @@
 .listWrap {
   height: 100%;
   width: 100%;
-  overflow: scroll;
 }
 
 ul {

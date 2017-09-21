@@ -13,6 +13,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Slider.css';
 import $ from 'jquery';
 import Posts from '../Posts';
+import revealBrowser from '../../helpers/revealBrowser'
 import upIcon from './upIcon.png';
 
 class Slider extends React.Component {
@@ -28,6 +29,7 @@ class Slider extends React.Component {
   }
 
   componentDidMount() {
+    console.log("REVEAl: ", revealBrowser())
     if (typeof window !== 'undefined') {
       const myElement = window.document.getElementById('slideArea');
       const hammertime = new Hammer.Manager(myElement, {
@@ -36,17 +38,16 @@ class Slider extends React.Component {
         ]
       });
       hammertime.on('panup', function(ev) {
-      	$('#sliderContainer').css('height', '60%')
-        $('#sliderContainer').css('top', '40%')
-        $('#slideArea').css('height', '20%')
-        $('#listWrap').css('overflow', 'scroll')
+      	$('#sliderContainer').css('height', '78%')
+        $('#slideArea').css('height', '14%')
+        $('#sliderContainer').css('overflow-y', 'scroll')
       });
 
       hammertime.on('pandown', function(ev) {
-      	$('#sliderContainer').css('height', '20%')
-        $('#sliderContainer').css('top', '80%')
-        $('#listWrap').css('overflow', 'hidden')
-        $('#slideArea').css('height', '80%')
+      	$('#sliderContainer').css('height', '24%')
+        $('#listWrap').css('overflow', 'unset')
+        $('#slideArea').css('height', '100%')
+        $('#sliderContainer').css('overflow-y', 'hidden')
       });
     }
   }

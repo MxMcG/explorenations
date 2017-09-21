@@ -29,7 +29,7 @@ class Home extends React.Component {
     this.updateLocation = this.updateLocation.bind(this);
     this.selectLocation = this.selectLocation.bind(this);
     this.getCountryData = this.getCountryData.bind(this);
-    this.togglePostView = this.togglePostView.bind(this);
+    // this.togglePostView = this.togglePostView.bind(this);
     this.state = {
       activeCountry: null,
       activePost: null,
@@ -70,6 +70,7 @@ class Home extends React.Component {
             streetViewControl: false,
             rotateControl: false,
             fullscreenControl: false,
+            gestureHandling: 'greedy',
           });
           const fusionTable = new google.maps.FusionTablesLayer({
             query: {
@@ -177,20 +178,19 @@ class Home extends React.Component {
       });
   }
 
-  togglePostView(index) {
-    console.log("I", index)
-    // hide all other posts
-    // show image, fully formatted div along bottom screen
-    if (this.state.showPost === true) {
-      this.setState({
-        showPost: false
-      })
-    } else {
-      this.setState({
-        showPost: true
-      })
-    }
-  }
+  // togglePostView(index) {
+  //   // hide all other posts
+  //   // show image, fully formatted div along bottom screen
+  //   if (this.state.showPost === true) {
+  //     this.setState({
+  //       showPost: false
+  //     })
+  //   } else {
+  //     this.setState({
+  //       showPost: true
+  //     })
+  //   }
+  // }
 
   updateLocation(location) {
     this.state.fusionTable.setMap(null);
@@ -249,12 +249,12 @@ class Home extends React.Component {
             className={s.dropdownOveride}
           />
           <div id="map" className={s.map} />
-          { this.state.countryData &&
-            <Slider
-              postData={this.state.countryData}
-            />
-          }
         </div>
+        { this.state.countryData &&
+          <Slider
+            postData={this.state.countryData}
+          />
+        }
       </div>
     );
   }
