@@ -17,7 +17,7 @@
   background: #121516;
   color: #fff;
   display: block;
-  height: 10%;
+  height: 14%;
 }
 
 .container {
@@ -25,12 +25,13 @@
   padding: 10px 0;
   text-align: center;
   display: block;
-  max-width: var(--max-content-width);
+  height: 100%;
 }
 
 .logo {
-  height: 100%;
-  width: 25%;
+  height: 76%;
+  width: 39%;
+  margin: 5px 0;
 }
 
 @media only screen and (min-width: 640px) {

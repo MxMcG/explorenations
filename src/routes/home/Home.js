@@ -17,7 +17,9 @@ import 'semantic-ui-css/semantic.min.css';
 import s from './Home.css';
 import Slider from '../../components/Slider';
 import { countryOptions } from './countries'
-const wp = new WPAPI({ endpoint: 'https://www.nationsfoundation.org/wp-json' });
+const wp = new WPAPI({
+  endpoint: 'https://www.nationsfoundation.org/wp-json',
+});
 
 class Home extends React.Component {
   constructor(props) {
@@ -63,7 +65,7 @@ class Home extends React.Component {
             zoom: 4,
             center: results[0].geometry.location,
             zoomControl: false,
-            mapTypeControl: true,
+            mapTypeControl: false,
             scaleControl: false,
             streetViewControl: false,
             rotateControl: false,
@@ -235,21 +237,23 @@ class Home extends React.Component {
   render() {
     return (
       <div className={s.root}>
-        <Dropdown
-          placeholder="Select Country"
-          fluid
-          search
-          selection
-          options={countryOptions}
-          onChange={this.selectLocation}
-          placeholder={`${this.state.activeCountry}`}
-          className={s.dropdownOveride} />
         <div className={s.mapWrap}>
-          <div id="map" className={s.map} />
-          <Slider
-            postData={this.state.countryData}
-            authorData={this.state.countryData}
+          <Dropdown
+            placeholder="Select Country"
+            fluid
+            search
+            selection
+            options={countryOptions}
+            onChange={this.selectLocation}
+            placeholder={`${this.state.activeCountry}`}
+            className={s.dropdownOveride}
           />
+          <div id="map" className={s.map} />
+          { this.state.countryData &&
+            <Slider
+              postData={this.state.countryData}
+            />
+          }
         </div>
       </div>
     );

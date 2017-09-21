@@ -13,18 +13,12 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Slider.css';
 import $ from 'jquery';
 import Posts from '../Posts';
-import Authors from '../Authors';
+import upIcon from './upIcon.png';
 
 class Slider extends React.Component {
   static defaultProps = {
     postData: PropTypes.object,
-    authorData: PropTypes.object,
   }
-
-  static propTypes = {
-    postData: PropTypes.object,
-    authorData: PropTypes.object,
-  };
 
   constructor(props) {
     super(props);
@@ -61,57 +55,23 @@ class Slider extends React.Component {
     this.setState({ activeList: list });
   }
 
-  list() {
-    // if (this.state.activeList === 'stories' && this.props.postData.length > 0) {
-    //   return (this.props.postData.map((post, index) => (
-    //     <Posts />
-    //   ))
-    // } else {
-    //   return (this.props.authorData.map((author, index) => (
-    //     <Authors data={author} />
-    //   ))
-    // }
-  }
-
   render() {
     return (
         <div className={s.sliderContainer} id={'sliderContainer'}>
           <div className={s.slideArea} id={'slideArea'}>
-            <div className={s.arrow}>^</div>
-            <div className={s.filter}>
-              <div
-                className={`${s.boxLeft} ${this.state.activeList === 'reformers' ? s.activeList : s.inactiveList}`}
-                onClick={() => { this.toggleList('reformers'); }}
-              >
-                  Reformers
-              </div>
-              <div
-                className={`${s.boxRight} ${this.state.activeList === 'stories' ? s.activeList : s.inactiveList}`}
-                onClick={() => { this.toggleList('stories'); }}
-              >
-                Stories
-              </div>
+            <div className={s.arrow}>
+              <img src={upIcon} />
             </div>
           </div>
-
           <div className={s.listWrap} id={'listWrap'}>
             {
-              this.state.activeList === 'stories' ?
-                this.props.postData &&
-                this.props.postData.map((post, index) => (
-                  <Posts
-                    key={index}
-                    data={post}
-                  />
-                ))
-              :
-                this.props.authorData &&
-                this.props.authorData.map((author, index) => (
-                  <Posts
-                    key={index}
-                    data={author}
-                  />
-                ))
+              this.props.postData &&
+              this.props.postData.map((post, index) => (
+                <Posts
+                  key={index}
+                  data={post}
+                />
+              ))
             }
           </div>
         </div>
@@ -248,4 +208,20 @@ export default withStyles(s)(Slider);
 //     </div>
 //
 //   ) : false}
+// </div>
+
+
+// <div className={s.filter}>
+//   <div
+//     className={`${s.boxLeft} ${this.state.activeList === 'reformers' ? s.activeList : s.inactiveList}`}
+//     onClick={() => { this.toggleList('reformers'); }}
+//   >
+//       Reformers
+//   </div>
+//   <div
+//     className={`${s.boxRight} ${this.state.activeList === 'stories' ? s.activeList : s.inactiveList}`}
+//     onClick={() => { this.toggleList('stories'); }}
+//   >
+//     Stories
+//   </div>
 // </div>

@@ -12,6 +12,7 @@ import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Posts.css';
 import $ from 'jquery';
+import arrowRight from './arrowRight.png';
 
 class Posts extends React.Component {
   static defaultProps = {
@@ -39,8 +40,7 @@ class Posts extends React.Component {
       <div
         onClick={() => {}}
         className={s.container}
-        >
-        
+      >
         <img
           src={this.props.data.mediaUrl}
           alt="Nations Foundation"
@@ -52,7 +52,11 @@ class Posts extends React.Component {
           >
           {this.props.data.title.rendered}
         </a>
-        <div className={s.sideCarrot}>></div>
+        <img
+          src={arrowRight}
+          alt="Nations Foundation"
+          className={s.arrowRight}
+        />
       </div>
     );
   }

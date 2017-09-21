@@ -63,6 +63,7 @@ class Html extends React.Component {
           <script src="https://hammerjs.github.io/dist/hammer.min.js" />
         </head>
         <body>
+
           <div id="app" dangerouslySetInnerHTML={{ __html: children }} />
 
           <script

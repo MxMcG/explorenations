@@ -11,7 +11,7 @@
 
 .root {
   display: block;
-  height: 90%;
+  height: 86%;
   width: 100%;
   position: absolute;
 }
@@ -23,7 +23,7 @@
 }
 
 .mapWrap {
-  height: 94%;
+  height: 100%;
   width: 100%;
   position: absolute;
   left: 0;
@@ -62,11 +62,15 @@
 }
 
 .dropdownOveride {
-  height: 6% !important;
-  min-height: 0 !important;
-  padding: 9px 12px !important;
   display: block !important;
   border: none !important;
   border-bottom: 1px solid #ddd !important;
-  border-radius: 0 !important;
+  box-shadow: 6px 4px 20px #888888 !important;;  
+  z-index: 1 !important;;
+  width: 94% !important;
+  margin: 10px auto !important;;
+}
+
+.dropdown .text {
+  vertical-align: -webkit-baseline-middle;
 }
