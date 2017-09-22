@@ -28,6 +28,7 @@ class Home extends React.Component {
     this.setInitialLocation = this.setInitialLocation.bind(this);
     this.updateLocation = this.updateLocation.bind(this);
     this.selectLocation = this.selectLocation.bind(this);
+    this.setZoom = this.setZoom.bind(this);
     this.getCountryData = this.getCountryData.bind(this);
     // this.togglePostView = this.togglePostView.bind(this);
     this.state = {
@@ -38,15 +39,19 @@ class Home extends React.Component {
       countryData: null,
       postLinks: [],
       fusionTable: null,
+      zoom: 4,
     };
   }
 
   componentWillMount() {
     if (this.state.activeCountry === null) {
       const initialCountry = countryOptions[Math.floor(Math.random() * countryOptions.length)];
+      const isClient = typeof window !== 'undefined' ? true : false
       this.setState({
         activeCountry: initialCountry.text,
         activeCountryAbvr: initialCountry.value,
+        isClient,
+
       });
     }
   }
@@ -55,14 +60,34 @@ class Home extends React.Component {
     this.setInitialLocation();
   }
 
+  setZoom() {
+    const largeCountries = [
+      'United States',
+      'Canada',
+      'Russia',
+      'China',
+    ]
+    largeCountries.filter((country) => {
+      if (this.state.map.setZoom) {
+        if (this.state.activeCountry === country) {
+          this.state.map.setZoom(3);
+        } else {
+          this.state.map.setZoom(4);
+        }
+      }
+    });
+  }
+
   setInitialLocation() {
     if (window.google) {
-      const geocoder = new google.maps.Geocoder();
       let map;
+      const geocoder = new google.maps.Geocoder();
+      this.getCountryData(this.state.activeCountry);
+      this.setZoom();
       geocoder.geocode({ 'address': this.state.activeCountry }, (results, status) => {
         if (status == 'OK') {
           map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 4,
+            zoom: this.state.zoom,
             center: results[0].geometry.location,
             zoomControl: false,
             mapTypeControl: false,
@@ -105,14 +130,6 @@ class Home extends React.Component {
         }
       });
     }
-  }
-
-  selectLocation(e, { value }) {
-    const selectedValue = _.find(countryOptions, { value });
-    const activeCountry = selectedValue.text;
-    const activeCountryAbvr = selectedValue.value;
-    this.setState({ activeCountry, activeCountryAbvr });
-    this.updateLocation(activeCountry);
   }
 
   getCountryData(name) {
@@ -178,6 +195,14 @@ class Home extends React.Component {
       });
   }
 
+  selectLocation(e, { value }) {
+    const selectedValue = _.find(countryOptions, { value });
+    const activeCountry = selectedValue.text;
+    const activeCountryAbvr = selectedValue.value;
+    this.setState({ activeCountry, activeCountryAbvr });
+    this.updateLocation(activeCountry);
+  }
+
   // togglePostView(index) {
   //   // hide all other posts
   //   // show image, fully formatted div along bottom screen
@@ -197,7 +222,8 @@ class Home extends React.Component {
     this.getCountryData(location);
     this.state.geocoder.geocode({ 'address': location }, (results, status) => {
       if (status === 'OK') {
-        this.state.map.setCenter(results[0].geometry.location);
+        this.setZoom();
+        this.state.map.panTo(results[0].geometry.location);
         const fusionTable = new google.maps.FusionTablesLayer({
           query: {
             select: 'geometry',
@@ -261,13 +287,3 @@ class Home extends React.Component {
 }
 
 export default withStyles(s)(Home);
-
-// { this.state.countryData !== null && this.state.countryData.map((data, index) => (
-//     <Post
-//       index={index}
-//       data={data}
-//       activatePost={this.activatePost}
-//       activePost={this.state.activePost}
-//     />
-//   ))
-// }

@@ -10,25 +10,37 @@
   border-radius: 10px 10px 0 0;
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
+  box-shadow: 4px 4px 20px #888888;
 }
 
 .slideArea {
-  background: orange;
+  cursor: pointer;
   height: 100%;
   width: 100%;
   text-align: center;
 }
 
-.arrow {
-  height: 100px;
+.default {
+  height: 80px;
 }
 
 .listWrap {
   overflow-y: hidden;
   max-height: 0px;
   width: 100%;
-  -webkit-transition: height .25s ease-in, overflow-y .25s ease-in .25s;
-  transition: max-height .25s ease-in, overflow-y .25s ease-in .25s;
+  -webkit-transition: height .2s ease-in, overflow-y .2s ease-in .2s;
+  transition: max-height .2s ease-in, overflow-y .2s ease-in .2s;
+}
+
+.upIcon {
+  transition:
+    transform 0.2s ease-out,
+    -webkit-transform 0.2s ease-out,
+    -moz-transform 0.2s ease-out;
+  position: relative;
+  top: 8px;
+  height: 30px;
+  width: 36px;
 }
 
 ul {

@@ -17,6 +17,7 @@ import arrowRight from './arrowRight.png';
 class Posts extends React.Component {
   static defaultProps = {
     data: PropTypes.object,
+    index: PropTypes.number,
   }
 
   static propTypes = {
@@ -30,17 +31,19 @@ class Posts extends React.Component {
     };
   }
 
-  componentDidMount() {
-
+  openLink(url) {
+    console.log("HIII")
+    window.open(url, '_blank');
   }
 
   render() {
     console.log(this.props.data)
     return (
       <div
-        onClick={() => {}}
+        onClick={() => { this.openLink(this.props.data.link); }}
         className={s.container}
       >
+        { <hr className={s.line} /> }
         <img
           src={this.props.data.mediaUrl}
           alt="Nations Foundation"
@@ -55,7 +58,7 @@ class Posts extends React.Component {
         <img
           src={arrowRight}
           alt="Nations Foundation"
-          className={s.arrowRight}
+          className={s.sideCarrot}
         />
       </div>
     );

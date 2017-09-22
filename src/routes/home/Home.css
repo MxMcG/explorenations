@@ -11,7 +11,7 @@
 
 .root {
   display: block;
-  height: 86%;
+  height: 88%;
   width: 100%;
   position: absolute;
 }
@@ -40,12 +40,6 @@
   top: 0;
 }
 
-@media only screen and (min-width: 640px) {
-  .map {
-    top: 151px;
-  }
-}
-
 .image {
   height: 100%;
   width: 100%;
@@ -65,7 +59,7 @@
   display: block !important;
   border: none !important;
   border-bottom: 1px solid #ddd !important;
-  box-shadow: 6px 4px 20px #888888 !important;;  
+  box-shadow: 6px 4px 20px #888888 !important;;
   z-index: 1 !important;;
   width: 94% !important;
   margin: 10px auto !important;;
