@@ -25,11 +25,17 @@ class Slider extends React.Component {
     super(props);
     this.state = {
       activeList: 'stories',
+      browser: null,
     };
   }
 
+  componentWillMount() {
+    const browser = revealBrowser();
+
+    this.setState({ browser });
+  }
+
   componentDidMount() {
-    console.log("REVEAl: ", revealBrowser())
     if (typeof window !== 'undefined') {
       const myElement = window.document.getElementById('slideArea');
       const hammertime = new Hammer.Manager(myElement, {
@@ -39,16 +45,16 @@ class Slider extends React.Component {
       });
       hammertime.on('panup', function(ev) {
       	// $('#sliderContainer').css('height', '78%')
-        $('#listWrap').css('max-height', '350px')
+        $('#listWrap').css('max-height', `${(window.innerHeight * 0.75) - 200}px`)
         $('#slideArea').css('height', '100%')
-        $('#sliderContainer').css('overflow-y', 'scroll')
+        $('#listWrap').css('overflow-y', 'scroll')
       });
 
       hammertime.on('pandown', function(ev) {
       	// $('#sliderContainer').css('height', '24%')
       	$('#listWrap').css('max-height', '0px')
         $('#slideArea').css('height', '100%')
-        $('#sliderContainer').css('overflow-y', 'hidden');
+        $('#listWrap').css('overflow-y', 'hidden');
       });
     }
   }
