@@ -43,6 +43,14 @@
   width: 36px;
 }
 
+.line {
+  margin: 0;
+  height: 0;
+  width: 68%;
+  position: relative;
+  left: 26%;
+}
+
 ul {
   list-style: none;
   padding: 0;
@@ -80,4 +88,11 @@ li {
   width: 50%;
   height: 100%;
   display: inline-block;
+}
+
+@media only screen and (min-width: 640px) {
+  .line {
+    width: 76%;
+    left: 22%
+  }
 }

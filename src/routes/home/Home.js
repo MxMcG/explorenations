@@ -24,7 +24,7 @@ const wp = new WPAPI({
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.activatePost = this.activatePost.bind(this);
+    this.activateSlider = this.activateSlider.bind(this);
     this.setInitialLocation = this.setInitialLocation.bind(this);
     this.updateLocation = this.updateLocation.bind(this);
     this.selectLocation = this.selectLocation.bind(this);
@@ -32,6 +32,7 @@ class Home extends React.Component {
     this.getCountryData = this.getCountryData.bind(this);
     // this.togglePostView = this.togglePostView.bind(this);
     this.state = {
+      sliderActive: false,
       activeCountry: null,
       activePost: null,
       map: {},
@@ -255,9 +256,12 @@ class Home extends React.Component {
     });
   }
 
-  activatePost(index) {
-    console.log("INDEX", index)
-    this.setState({ activePost: index });
+  activateSlider() {    
+    if (this.state.sliderActive === true) {
+      this.setState({ sliderActive: false });
+    } else {
+      this.setState({ sliderActive: true });
+    }
   }
 
   render() {
@@ -276,8 +280,14 @@ class Home extends React.Component {
           />
           <div id="map" className={s.map} />
         </div>
+        <div
+          className={s.countryOverlay}
+          onClick={() => { this.activateSlider(); }}
+        />
         { this.state.countryData &&
           <Slider
+            sliderActive={this.state.sliderActive}
+            activateSlider={this.activateSlider}
             postData={this.state.countryData}
           />
         }

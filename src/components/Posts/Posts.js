@@ -32,29 +32,26 @@ class Posts extends React.Component {
   }
 
   openLink(url) {
-    console.log("HIII")
     window.open(url, '_blank');
   }
 
   render() {
-    console.log(this.props.data)
     return (
       <div
         onClick={() => { this.openLink(this.props.data.link); }}
         className={s.container}
       >
-        { <hr className={s.line} /> }
         <img
           src={this.props.data.mediaUrl}
           alt="Nations Foundation"
-          className={s.image} />
-        <a
-          href={this.props.data.link}
+          className={s.image}
+        />
+        <p
           target="_blank"
           className={`${s.link}`}
           >
           {this.props.data.title.rendered}
-        </a>
+        </p>
         <img
           src={arrowRight}
           alt="Nations Foundation"

@@ -40,6 +40,15 @@
   top: 0;
 }
 
+.countryOverlay {
+  height: 40%;
+  width: 50%;
+  margin: 0 auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 .image {
   height: 100%;
   width: 100%;
