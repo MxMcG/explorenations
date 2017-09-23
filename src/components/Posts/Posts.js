@@ -46,12 +46,19 @@ class Posts extends React.Component {
           alt="Nations Foundation"
           className={s.image}
         />
-        <p
-          target="_blank"
-          className={`${s.link}`}
-          >
-          {this.props.data.title.rendered}
-        </p>
+      <div className={s.titleWrap}>
+          <p
+            className={`${s.link}`}
+            >
+            {this.props.data.title.rendered}
+          </p>
+          <p
+            target="_blank"
+            className={`${s.authorLink}`}
+            >
+            {this.props.data.authorName}
+          </p>
+        </div>
         <img
           src={arrowRight}
           alt="Nations Foundation"

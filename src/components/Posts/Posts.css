@@ -12,16 +12,27 @@
   border-radius: 50%;
 }
 
-.link {
+.titleWrap {
+  width: 50%;
   display: inline-block;
   position: relative;
+  top: 6px;
+}
+
+.link {
+  display: block;
+  position: relative;
   top: 5px;
-  width: 50%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   margin: 0 0 0 6%;
   font-size: 17px;
+}
+
+.authorLink {
+  font-size: 14px;
+  margin: 0 0 0 10%;
 }
 
 .sideCarrot {
@@ -38,6 +49,9 @@
   }
   .link {
     font-size: 20px;
+  }
+  .authorLink {
+    font-size: 16px;
   }
 }
 

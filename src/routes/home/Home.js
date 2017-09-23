@@ -164,8 +164,12 @@ class Home extends React.Component {
             for (let i = 0; i < posts.length; i += 1) {
               linksWithMedia.push(
                 wp.media().id(posts[i].featured_media).then(media => {
+                  wp.users().id(posts[i].author).then(author => {
+                    posts[i]['authorName'] = author.name;
+                  });
                   posts[i]['mediaUrl'] = media.source_url;
                   return posts[i];
+
                 })
               )
             }
@@ -256,7 +260,7 @@ class Home extends React.Component {
     });
   }
 
-  activateSlider() {    
+  activateSlider() {
     if (this.state.sliderActive === true) {
       this.setState({ sliderActive: false });
     } else {
