@@ -16,7 +16,8 @@
   width: 50%;
   display: inline-block;
   position: relative;
-  top: 6px;
+  top: 14px;
+  margin-left: 8px;
 }
 
 .link {
@@ -32,16 +33,27 @@
 
 .authorLink {
   font-size: 14px;
+  display: block;
   margin: 0 0 0 10%;
+  white-space: nowrap;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
 }
 
 .sideCarrot {
   margin-left: 6%;
 }
 
+@media only screen and (min-width: 400px) {
+  .sideCarrot {
+    margin-left: 16%;
+  }
+}
+
 @media only screen and (min-width: 640px) {
   .sideCarrot {
-    margin-left: 12%;
+    margin-left: 16%;
   }
   .image {
     width: 130px;
@@ -53,11 +65,19 @@
   .authorLink {
     font-size: 16px;
   }
+  .titleWrap {
+    margin-left: 22px;
+  }
 }
 
 @media only screen and (min-width: 960px) {
   .sideCarrot {
     margin-left: 22%;
   }
+}
 
+@media only screen and (min-width: 1200px) {
+  .sideCarrot {
+    margin-left: 30%;
+  }
 }

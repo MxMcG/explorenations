@@ -19,13 +19,13 @@ import upIcon from './upIcon.png';
 class Slider extends React.Component {
   static defaultProps = {
     postData: PropTypes.object,
-    sliderActive: PropTypes.string,
+    sliderActive: PropTypes.bool,
     activateSlider: PropTypes.func,
   }
 
   static propTypes = {
     postData: PropTypes.obj,
-    sliderActive: PropTypes.string,
+    sliderActive: PropTypes.bool,
     activateSlider: PropTypes.func,
   }
 
@@ -118,15 +118,18 @@ class Slider extends React.Component {
 
         <div className={s.listWrap} id={'listWrap'}>
           {
-            this.props.postData &&
             this.props.postData.map((post, index) => (
+              post.authorName &&
               <div>
                 { <hr className={s.line} /> }
-              <Posts
-                key={index}
-                index={index}
-                data={post}
-              />
+                <Posts
+                  key={index}
+                  index={index}
+                  mediaUrl={post.mediaUrl}
+                  title={post.title.rendered}
+                  authorName={post.authorName}
+                  link={post.link}
+                />
               </div>
             ))
           }

@@ -16,12 +16,21 @@ import arrowRight from './arrowRight.png';
 
 class Posts extends React.Component {
   static defaultProps = {
-    data: PropTypes.object,
-    index: PropTypes.number,
+    data: PropTypes.object.isRequired,
+    link: PropTypes.string.isRequired,
+    mediaUrl: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    authorName: PropTypes.string.isRequired,
+    index: PropTypes.number.isRequired,
   }
 
   static propTypes = {
-
+    data: PropTypes.object.isRequired,
+    link: PropTypes.string.isRequired,
+    mediaUrl: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    authorName: PropTypes.string.isRequired,
+    index: PropTypes.number.isRequired,
   };
 
   constructor(props) {
@@ -38,25 +47,25 @@ class Posts extends React.Component {
   render() {
     return (
       <div
-        onClick={() => { this.openLink(this.props.data.link); }}
+        onClick={() => { this.openLink(this.props.link); }}
         className={s.container}
       >
         <img
-          src={this.props.data.mediaUrl}
+          src={this.props.mediaUrl}
           alt="Nations Foundation"
           className={s.image}
         />
-      <div className={s.titleWrap}>
+        <div className={s.titleWrap}>
           <p
             className={`${s.link}`}
-            >
-            {this.props.data.title.rendered}
+          >
+            {this.props.title}
           </p>
           <p
             target="_blank"
             className={`${s.authorLink}`}
-            >
-            {this.props.data.authorName}
+          >
+            {this.props.authorName}
           </p>
         </div>
         <img

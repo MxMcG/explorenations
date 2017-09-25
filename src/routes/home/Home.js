@@ -29,8 +29,7 @@ class Home extends React.Component {
     this.updateLocation = this.updateLocation.bind(this);
     this.selectLocation = this.selectLocation.bind(this);
     this.setZoom = this.setZoom.bind(this);
-    this.getCountryData = this.getCountryData.bind(this);
-    // this.togglePostView = this.togglePostView.bind(this);
+    this.getCountryData = this.getCountryData.bind(this);    
     this.state = {
       sliderActive: false,
       activeCountry: null,
@@ -169,7 +168,6 @@ class Home extends React.Component {
                   });
                   posts[i]['mediaUrl'] = media.source_url;
                   return posts[i];
-
                 })
               )
             }
@@ -178,7 +176,6 @@ class Home extends React.Component {
             }).catch(err => {
               console.log(err)
             })
-            // resolve(posts);
           })
           .catch(err => {
             reject(err);
@@ -204,23 +201,13 @@ class Home extends React.Component {
     const selectedValue = _.find(countryOptions, { value });
     const activeCountry = selectedValue.text;
     const activeCountryAbvr = selectedValue.value;
-    this.setState({ activeCountry, activeCountryAbvr });
+    this.setState({
+      activeCountry,
+      activeCountryAbvr,
+      sliderActive: false,
+    });
     this.updateLocation(activeCountry);
   }
-
-  // togglePostView(index) {
-  //   // hide all other posts
-  //   // show image, fully formatted div along bottom screen
-  //   if (this.state.showPost === true) {
-  //     this.setState({
-  //       showPost: false
-  //     })
-  //   } else {
-  //     this.setState({
-  //       showPost: true
-  //     })
-  //   }
-  // }
 
   updateLocation(location) {
     this.state.fusionTable.setMap(null);

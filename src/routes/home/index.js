@@ -15,7 +15,7 @@ async function action() {
   const title = 'hi';
   return {
     chunks: ['home'],
-    title: 'React Starter Kit',
+    title: 'Explore | Nations Foundation',
     component: (
       <Layout>
         <Home title={title} />

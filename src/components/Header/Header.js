@@ -17,7 +17,7 @@ class Header extends React.Component {
     return (
       <div className={s.root}>
         <div className={s.container}>
-          <a href={'https://nationsfoundation.org'} target={'_blank'}>
+          <a href={'https://nationsfoundation.org'}>
             <img src={logo} className={s.logo} />
           </a>
         </div>
