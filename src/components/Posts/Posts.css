@@ -5,6 +5,11 @@
   cursor: pointer;
 }
 
+.container:hover {
+  opacity: .6;
+  transition: opacity 0.2s ease-in-out;
+}
+
 .image {
   width: 68px;
   height: 68px;
@@ -45,7 +50,7 @@
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
   position: relative;
-  top: 6px;
+  top: 6chrompx;
 }
 
 

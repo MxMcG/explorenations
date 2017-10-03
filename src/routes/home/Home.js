@@ -89,6 +89,7 @@ class Home extends React.Component {
           map = new google.maps.Map(document.getElementById('map'), {
             zoom: this.state.zoom,
             center: results[0].geometry.location,
+            minZoom: 3,
             zoomControl: false,
             mapTypeControl: false,
             scaleControl: false,
@@ -133,7 +134,7 @@ class Home extends React.Component {
   }
 
   getCountryData(name) {
-    function fetchTagBySearch(name) {
+    async function fetchTagBySearch(name) {
       return new Promise((resolve, reject) => {
         wp
           .tags()
@@ -153,8 +154,9 @@ class Home extends React.Component {
       });
     }
 
-    function mergePostData(post) {
+    async function mergePostData(post) {
       return new Promise((resolve, reject) => {
+        console.log("POST: ", post)
         const one = wp.media().id(post.featured_media).then(media => {
           post['mediaUrl'] = media.source_url;
           return post;
@@ -164,15 +166,16 @@ class Home extends React.Component {
           return post;
         });
         Promise.all([one, two]).then(res => {
-          // If both promises are complete, object is updated in both array elements
+          // If both promises are complete, object is updated in both
           resolve(res[0]);
+          resolve(res);
         }).catch(err => {
-          reject(err);
+          console.log(err)
         })
       })
     }
 
-    function getPosts(id) {
+    async function getPosts(id) {
       return new Promise((resolve, reject) => {
         wp
           .posts()
@@ -184,7 +187,9 @@ class Home extends React.Component {
                 mergePostData(posts[i])
               )
             }
+            console.log("LOWERS")
             Promise.all(linksWithMedia).then(array => {
+              console.log("RESOLVE", array)
               resolve(array);
             }).catch(err => {
               console.log(err)
