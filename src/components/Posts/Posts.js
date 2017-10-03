@@ -50,11 +50,15 @@ class Posts extends React.Component {
         onClick={() => { this.openLink(this.props.link); }}
         className={s.container}
       >
-        <img
-          src={this.props.mediaUrl}
-          alt="Nations Foundation"
-          className={s.image}
-        />
+
+      <div
+        style={{
+          background: `url(${this.props.mediaUrl}) scroll no-repeat center/cover`,
+        }}
+        className={s.image}
+      >
+
+      </div>
         <div className={s.titleWrap}>
           <p
             className={`${s.link}`}
@@ -79,3 +83,10 @@ class Posts extends React.Component {
 }
 
 export default withStyles(s)(Posts);
+
+// <img
+//   src={this.props.mediaUrl}
+//   alt="Nations Foundation"
+//   className={s.image}
+//   style={{ background: this.props.mediaUrl }}
+// />

@@ -8,6 +8,7 @@
 .image {
   width: 68px;
   height: 68px;
+  vertical-align: middle;
   display: inline-block;
   border-radius: 50%;
 }
@@ -15,9 +16,13 @@
 .titleWrap {
   width: 50%;
   display: inline-block;
-  position: relative;
-  top: 14px;
+  vertical-align: middle;
   margin-left: 8px;
+}
+
+.sideCarrot {
+  margin-left: 6%;
+  vertical-align: middle;
 }
 
 .link {
@@ -40,12 +45,9 @@
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
   position: relative;
-  top: 4px;
+  top: 6px;
 }
 
-.sideCarrot {
-  margin-left: 6%;
-}
 
 @media only screen and (min-width: 400px) {
   .sideCarrot {
