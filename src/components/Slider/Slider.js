@@ -18,13 +18,13 @@ import upIcon from './upIcon.png';
 
 class Slider extends React.Component {
   static defaultProps = {
-    postData: PropTypes.object,
+    postData: PropTypes.array,
     sliderActive: PropTypes.bool,
     activateSlider: PropTypes.func,
   }
 
   static propTypes = {
-    postData: PropTypes.obj,
+    postData: PropTypes.array,
     sliderActive: PropTypes.bool,
     activateSlider: PropTypes.func,
   }

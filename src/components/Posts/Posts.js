@@ -16,7 +16,7 @@ import arrowRight from './arrowRight.png';
 
 class Posts extends React.Component {
   static defaultProps = {
-    data: PropTypes.object.isRequired,
+    data: PropTypes.func.isRequired,
     link: PropTypes.string.isRequired,
     mediaUrl: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
@@ -25,7 +25,7 @@ class Posts extends React.Component {
   }
 
   static propTypes = {
-    data: PropTypes.object.isRequired,
+    data: PropTypes.func.isRequired,
     link: PropTypes.string.isRequired,
     mediaUrl: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,

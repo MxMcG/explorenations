@@ -29,7 +29,7 @@ class Home extends React.Component {
     this.updateLocation = this.updateLocation.bind(this);
     this.selectLocation = this.selectLocation.bind(this);
     this.setZoom = this.setZoom.bind(this);
-    this.getCountryData = this.getCountryData.bind(this);    
+    this.getCountryData = this.getCountryData.bind(this);
     this.state = {
       sliderActive: false,
       activeCountry: null,
@@ -133,7 +133,7 @@ class Home extends React.Component {
   }
 
   getCountryData(name) {
-    async function fetchTagBySearch(name) {
+    function fetchTagBySearch(name) {
       return new Promise((resolve, reject) => {
         wp
           .tags()
@@ -153,7 +153,26 @@ class Home extends React.Component {
       });
     }
 
-    async function getPosts(id) {
+    function mergePostData(post) {
+      return new Promise((resolve, reject) => {
+        const one = wp.media().id(post.featured_media).then(media => {
+          post['mediaUrl'] = media.source_url;
+          return post;
+        });
+        const two = wp.users().id(post.author).then(author => {
+          post['authorName'] = author.name;
+          return post;
+        });
+        Promise.all([one, two]).then(res => {
+          // If both promises are complete, object is updated in both array elements
+          resolve(res[0]);
+        }).catch(err => {
+          reject(err);
+        })
+      })
+    }
+
+    function getPosts(id) {
       return new Promise((resolve, reject) => {
         wp
           .posts()
@@ -162,13 +181,7 @@ class Home extends React.Component {
             const linksWithMedia = [];
             for (let i = 0; i < posts.length; i += 1) {
               linksWithMedia.push(
-                wp.media().id(posts[i].featured_media).then(media => {
-                  wp.users().id(posts[i].author).then(author => {
-                    posts[i]['authorName'] = author.name;
-                  });
-                  posts[i]['mediaUrl'] = media.source_url;
-                  return posts[i];
-                })
+                mergePostData(posts[i])
               )
             }
             Promise.all(linksWithMedia).then(array => {

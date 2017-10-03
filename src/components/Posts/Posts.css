@@ -39,6 +39,8 @@
   overflow: hidden;
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
+  position: relative;
+  top: 4px;
 }
 
 .sideCarrot {
