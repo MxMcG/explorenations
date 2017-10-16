@@ -90,7 +90,6 @@ class Home extends React.Component {
             zoom: this.state.zoom,
             center: results[0].geometry.location,
             minZoom: 3,
-            zoomControl: false,
             mapTypeControl: false,
             scaleControl: false,
             streetViewControl: false,
@@ -156,7 +155,6 @@ class Home extends React.Component {
 
     async function mergePostData(post) {
       return new Promise((resolve, reject) => {
-        console.log("POST: ", post)
         const one = wp.media().id(post.featured_media).then(media => {
           post['mediaUrl'] = media.source_url;
           return post;
@@ -187,9 +185,7 @@ class Home extends React.Component {
                 mergePostData(posts[i])
               )
             }
-            console.log("LOWERS")
             Promise.all(linksWithMedia).then(array => {
-              console.log("RESOLVE", array)
               resolve(array);
             }).catch(err => {
               console.log(err)
