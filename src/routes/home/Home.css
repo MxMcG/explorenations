@@ -75,7 +75,8 @@
   box-shadow: 6px 4px 20px #888888 !important;;
   z-index: 1 !important;;
   width: 94% !important;
-  margin: 10px auto !important;;
+  margin: 10px auto !important;
+  cursor: 'pointer' !important;
 }
 
 .dropdown .text {

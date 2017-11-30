@@ -39,7 +39,7 @@ class Home extends React.Component {
       countryData: null,
       postLinks: [],
       fusionTable: null,
-      zoom: 4,
+      zoom: 2,
     };
   }
 
@@ -84,6 +84,14 @@ class Home extends React.Component {
       const geocoder = new google.maps.Geocoder();
       this.getCountryData(this.state.activeCountry);
       this.setZoom();
+      let allCountries = '';
+      for (let i = 0; i < countryOptions.length; i += 1) {
+        if (countryOptions[i + 1] === undefined) {
+          allCountries += (`'${countryOptions[i].key}' `)
+        } else {
+          allCountries += (`'${countryOptions[i].key}', `)
+        }
+      }
       geocoder.geocode({ 'address': this.state.activeCountry }, (results, status) => {
         if (status == 'OK') {
           map = new google.maps.Map(document.getElementById('map'), {
@@ -101,12 +109,12 @@ class Home extends React.Component {
             query: {
               select: 'geometry',
               from: '1N2LBk4JHwWpOY4d9fobIn27lfnZ5MDy-NoqqRpk',
-              where: `ISO_2DIGIT IN ('${this.state.activeCountryAbvr.toUpperCase()}')`,
+              where: `ISO_2DIGIT IN (${allCountries})`,
             },
             map,
             suppressInfoWindows: true,
             styles: [{
-              where: `ISO_2DIGIT IN ('${this.state.activeCountryAbvr.toUpperCase()}')`,
+              where: `ISO_2DIGIT IN (${allCountries})`,
               markerOptions: {
                 iconName: "supported_icon_name"
               },

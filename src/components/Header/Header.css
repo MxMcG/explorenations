@@ -29,7 +29,7 @@
 }
 
 .logo {
-  width: 120px;
+  width: 96px;
   position: relative;
   top: 50%;
   transform: translateY(-50%);
@@ -37,6 +37,6 @@
 
 @media only screen and (min-width: 640px) {
   .logo {
-    width: 160px;
+    width: 112px;
   }
 }
