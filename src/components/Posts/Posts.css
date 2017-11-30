@@ -1,0 +1,92 @@
+
+.container {
+  width: 100%;
+  padding: 14px 12px;
+  cursor: pointer;
+}
+
+.container:hover {
+  opacity: .6;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.image {
+  width: 68px;
+  height: 68px;
+  vertical-align: middle;
+  display: inline-block;
+  border-radius: 50%;
+}
+
+.titleWrap {
+  width: 50%;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 8px;
+}
+
+.sideCarrot {
+  margin-left: 6%;
+  vertical-align: middle;
+}
+
+.link {
+  display: block;
+  position: relative;
+  top: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0 0 0 6%;
+  font-size: 17px;
+}
+
+.authorLink {
+  font-size: 14px;
+  display: block;
+  margin: 0 0 0 10%;
+  white-space: nowrap;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  position: relative;
+  top: 6chrompx;
+}
+
+
+@media only screen and (min-width: 400px) {
+  .sideCarrot {
+    margin-left: 16%;
+  }
+}
+
+@media only screen and (min-width: 640px) {
+  .sideCarrot {
+    margin-left: 16%;
+  }
+  .image {
+    width: 130px;
+    height: 130px;
+  }
+  .link {
+    font-size: 20px;
+  }
+  .authorLink {
+    font-size: 16px;
+  }
+  .titleWrap {
+    margin-left: 22px;
+  }
+}
+
+@media only screen and (min-width: 960px) {
+  .sideCarrot {
+    margin-left: 22%;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .sideCarrot {
+    margin-left: 30%;
+  }
+}

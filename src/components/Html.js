@@ -46,10 +46,18 @@ class Html extends React.Component {
           </title>
           <meta name="description" content={description} />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
+
           {scripts.map(script =>
             <link key={script} rel="preload" href={script} as="script" />,
           )}
-          <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+          <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"></link>
+          <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+          <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+          <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+          <link rel="manifest" href="manifest.json" />
+          <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5" />
+          <meta name="theme-color" content="#ffffff" />
+          <link rel="stylesheet" href="misc.css" />
           {styles.map(style =>
             <style
               key={style.id}
@@ -57,9 +65,13 @@ class Html extends React.Component {
               dangerouslySetInnerHTML={{ __html: style.cssText }}
             />,
           )}
+          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9XyyFEV2xYcPGtr6x3j97HX4-Mnq_Lto" />
+          <script src="https://hammerjs.github.io/dist/hammer.min.js" />
         </head>
         <body>
+
           <div id="app" dangerouslySetInnerHTML={{ __html: children }} />
+
           <script
             dangerouslySetInnerHTML={{ __html: `window.App=${serialize(app)}` }}
           />

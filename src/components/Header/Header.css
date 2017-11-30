@@ -14,41 +14,29 @@
 }
 
 .root {
-  background: #373277;
+  background: #121516;
   color: #fff;
+  display: block;
+  height: 12%;
 }
 
 .container {
   margin: 0 auto;
-  padding: 20px 0;
-  max-width: var(--max-content-width);
-}
-
-.brand {
-  color: color(var(--brand-color) lightness(+10%));
-  text-decoration: none;
-  font-size: 1.75em; /* ~28px */
-}
-
-.brandTxt {
-  margin-left: 10px;
-}
-
-.banner {
+  padding: 10px 0;
   text-align: center;
+  display: block;
+  height: 100%;
 }
 
-.bannerTitle {
-  margin: 0;
-  padding: 10px;
-  font-weight: normal;
-  font-size: 4em;
-  line-height: 1em;
+.logo {
+  width: 96px;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.bannerDesc {
-  padding: 0;
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 1.25em;
-  margin: 0;
+@media only screen and (min-width: 640px) {
+  .logo {
+    width: 112px;
+  }
 }

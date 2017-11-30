@@ -10,26 +10,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import s from './Authors.css';
+import $ from 'jquery';
 
-// external-global styles must be imported in your JS.
-import normalizeCss from 'normalize.css';
-import s from './Layout.css';
-import Header from '../Header';
-import Footer from '../Footer';
+class Authors extends React.Component {
+  static defaultProps = {
+    data: PropTypes.object,
+  }
 
-class Layout extends React.Component {
   static propTypes = {
-    children: PropTypes.node.isRequired,
+
   };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+
+    };
+  }
+
+  componentDidMount() {
+
+  }
 
   render() {
     return (
-      <div className={s.root}>
-        <Header />
-        {this.props.children}
-      </div>
+        <div>
+
+        </div>
     );
   }
 }
 
-export default withStyles(normalizeCss, s)(Layout);
+export default withStyles(s)(Authors);

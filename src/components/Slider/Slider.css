@@ -1,0 +1,98 @@
+.sliderContainer {
+  position: absolute;
+  width: 94%;
+  /*max-height: 60%;*/
+  bottom: 0;
+  left: 50%;
+  overflow: hidden;
+  z-index: 3;
+  background: #FFFFFD;
+  border-radius: 10px 10px 0 0;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  box-shadow: 4px 4px 20px #888888;
+}
+
+.slideArea {
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+
+.default {
+  height: 80px;
+}
+
+.listWrap {
+  overflow-y: hidden;
+  max-height: 0px;
+  width: 100%;
+  -webkit-transition: height .2s ease-in, overflow-y .2s ease-in .2s;
+  transition: max-height .2s ease-in, overflow-y .2s ease-in .2s;
+}
+
+.upIcon {
+  transition:
+    transform 0.2s ease-out,
+    -webkit-transform 0.2s ease-out,
+    -moz-transform 0.2s ease-out;
+  position: relative;
+  top: 8px;
+  height: 30px;
+  width: 36px;
+}
+
+.line {
+  margin: 0;
+  height: 0;
+  width: 68%;
+  position: relative;
+  left: 26%;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-top: 40px;
+}
+
+/* BELOW STYLES NOT USED. ADD BACK IN IF FILTER BOX ADDED BACK */
+
+.filter {
+  height: 30px;
+  width: 200px;
+  margin: 0 auto;
+  border: 1px grey solid;
+}
+
+.activeList {
+  background: transparent;
+}
+
+.inactiveList {
+  background: grey;
+}
+
+.boxLeft {
+  width: 50%;
+  height: 100%;
+  border-right: 1px grey solid;
+  display: inline-block;
+}
+
+.boxRight {
+  width: 50%;
+  height: 100%;
+  display: inline-block;
+}
+
+@media only screen and (min-width: 640px) {
+  .line {
+    width: 76%;
+    left: 22%
+  }
+}

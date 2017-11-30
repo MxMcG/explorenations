@@ -10,40 +10,75 @@
 @import '../../components/variables.css';
 
 .root {
-  padding-left: 20px;
-  padding-right: 20px;
+  display: block;
+  height: 88%;
+  width: 100%;
+  position: absolute;
 }
 
 .container {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.mapWrap {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.map {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+
+.countryOverlay {
+  height: 15%;
+  width: 20%;
   margin: 0 auto;
-  padding: 0 0 40px;
-  max-width: var(--max-content-width);
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.newsItem {
-  margin: 0 0 2rem;
+.image {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
 }
 
-.newsTitle {
-  font-size: 1.5rem;
+.gm-bundled-control-on-bottom {
+  bottom: 50% !important;
 }
 
-.newsDesc {
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-size: 1.125rem;
-  }
+.linkContainer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  right: 0;
+  text-align: right;
 
-  pre {
-    white-space: pre-wrap;
-    font-size: 0.875rem;
-  }
+}
 
-  img {
-    max-width: 100%;
-  }
+.dropdownOveride {
+  display: block !important;
+  border: none !important;
+  border-bottom: 1px solid #ddd !important;
+  box-shadow: 6px 4px 20px #888888 !important;;
+  z-index: 1 !important;;
+  width: 94% !important;
+  margin: 10px auto !important;
+  cursor: 'pointer' !important;
+}
+
+.dropdown .text {
+  vertical-align: -webkit-baseline-middle;
 }
